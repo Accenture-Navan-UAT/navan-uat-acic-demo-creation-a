@@ -20,7 +20,7 @@ spec:
         - name: http-server
           containerPort: 5000
       imagePullSecrets:
-      - name: quay-cr-push-secret
+      - name: demo-for-the-oracle-cloud-a-robot-acc-pull-secret
       serviceAccountName: pipeline-account
 ---
 apiVersion: v1
@@ -32,7 +32,24 @@ metadata:
 spec:
   ports:
   - port: 5000
-    targetPort: http-server
+    targetPort: 5000
   selector:
     app: picalc
-  type: NodePort
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Route
+metadata:
+  annotations:
+    description: Route for SonarQube's http service.
+  name: picalc
+  labels:
+    app: picalc
+spec:
+  to:
+    kind: Service
+    name: picalc
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
