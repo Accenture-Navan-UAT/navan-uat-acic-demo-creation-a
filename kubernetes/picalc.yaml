@@ -36,20 +36,3 @@ spec:
   selector:
     app: picalc
   type: ClusterIP
-
----
-apiVersion: v1
-kind: Route
-metadata:
-  annotations:
-    description: Route for SonarQube's http service.
-  name: picalc
-  labels:
-    app: picalc
-spec:
-  to:
-    kind: Service
-    name: picalc
-  tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
