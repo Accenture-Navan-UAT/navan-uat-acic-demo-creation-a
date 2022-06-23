@@ -20,7 +20,7 @@ spec:
         - name: http-server
           containerPort: 5000
       imagePullSecrets:
-      - name: demo-for-the-oracle-cloud-a-robot-acc-pull-secret
+      - name: tekton-pipelines-showcase-a-demo-for-tekton-pipelines-pull-secret
       serviceAccountName: pipeline-account
 ---
 apiVersion: v1
